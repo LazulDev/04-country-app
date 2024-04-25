@@ -12,11 +12,11 @@
       @for (country of countries; track $index) {
         <tr>
           <td> {{$index + 1}}</td>
-          <td> {{country.flag}}</td>
+          <td> {{country.flagEmoji}}</td>
           <td>
-            <img [src]="country.flags.svg" [alt]="country.name.common">
+            <img [src]="country.flagImage.url" [alt]="country.flagImage.alt">
           </td>
-          <td> {{country.name.common}}</td>
+          <td> {{country.name}}</td>
           <td> {{country.capital}}</td>
           <td> {{country.population}}</td>
           <td> <a href="#">Ver más</a></td>

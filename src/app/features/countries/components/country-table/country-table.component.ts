@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Country} from "../../domain/country";
 import {CountryDto} from "../../infrastructure/country-dto";
 
 @Component({
@@ -10,5 +11,5 @@ import {CountryDto} from "../../infrastructure/country-dto";
 })
 export class CountryTableComponent {
   @Input()
-  public countries: CountryDto[] = []
+  public countries: Country[] = []
 }

@@ -1,9 +1,8 @@
-import {Observable} from "rxjs";
-import {CountryDto} from "../infrastructure/country-dto";
+import {Country} from "./country";
 
 export interface CountriesRepository {
-  searchByAlphaCode(code: string): Observable<CountryDto | null>;
-  searchByCapital(capital: string): Observable<CountryDto[]>
-  searchByName(name: string): Observable<CountryDto[]>
-  searchByRegion(term: string): Observable<CountryDto[]>
+  findByAlphaCode(code: string): Promise<Country | null>;
+  findAllByCapital(capital: string): Promise<Country[]>
+  findAllByName(name: string): Promise<Country[]>
+  findAllByRegion(term: string): Promise<Country[]>
 }

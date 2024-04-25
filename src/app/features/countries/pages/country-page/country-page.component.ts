@@ -1,8 +1,8 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {CountriesRepository} from "../../domain/countries-repository";
+import {Country} from "../../domain/country";
 import {COUNTRY_REPOSITORY_TOKEN} from "../../domain/country-repository-token";
-import {CountryDto} from "../../infrastructure/country-dto";
 
 @Component({
   selector: 'app-country-page',
@@ -14,22 +14,19 @@ import {CountryDto} from "../../infrastructure/country-dto";
 export class CountryPageComponent implements OnInit {
   @Input('alphaCode') alphaCode = '';
 
-  country?: CountryDto ;
+  country?: Country ;
+
   constructor(
     private readonly router: Router,
     @Inject(COUNTRY_REPOSITORY_TOKEN) private readonly countriesRepository: CountriesRepository
   ) { }
 
-  ngOnInit(): void {
-    this.countriesRepository.searchByAlphaCode(this.alphaCode)
-      .subscribe(country => {
-        if (!country) {
-          this.router.navigateByUrl('')
-        } else {
-          this.country = country;
-        }
-      });
+  async ngOnInit() {
+    const country = await this.countriesRepository.findByAlphaCode(this.alphaCode)
+    if (!country) {
+      this.router.navigateByUrl(''); // Redirect to home page
+      return;
+    }
+    this.country = country;
   }
-
-
 }
