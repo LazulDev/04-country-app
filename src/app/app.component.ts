@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {COMMON_SIDEBAR_ITEMS} from "./core/ui/sidebar-items";
 import {CountriesModule} from "./features/countries/countries.module";
-import {COUNTRY_SIDEBAR_ITEMS} from "./features/countries/interfaces/country-sidebar-items";
+import {COUNTRY_SIDEBAR_ITEMS} from "./features/countries/ui/country-sidebar-items";
 import {SidebarComponent} from "./shared/components/sidebar/sidebar.component";
 import {AboutPageComponent} from "./shared/pages/about-page/about-page.component";
 import {ContactPageComponent} from "./shared/pages/contact-page/contact-page.component";

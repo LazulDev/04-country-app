@@ -1,9 +1,10 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, Inject, OnDestroy} from '@angular/core';
 import {Subscription} from "rxjs";
 import {SearchBoxComponent} from "../../../../shared/components/search-box/search-box.component";
 import {CountryTableComponent} from "../../components/country-table/country-table.component";
-import {Country} from "../../interfaces/country";
-import {CountriesService} from "../../services/countries.service";
+import {CountriesRepository} from "../../domain/countries-repository";
+import {COUNTRY_REPOSITORY_TOKEN} from "../../domain/country-repository-token";
+import {CountryDto} from "../../infrastructure/country-dto";
 
 @Component({
   selector: 'app-by-country-page',
@@ -17,12 +18,14 @@ import {CountriesService} from "../../services/countries.service";
 })
 export class ByCountryPageComponent implements OnDestroy {
 
-  countries: Country[] = []
+  countries: CountryDto[] = []
 
   private readonly subscription = new Subscription();
-  constructor(private readonly countriesService: CountriesService) {}
+
+  constructor(@Inject(COUNTRY_REPOSITORY_TOKEN) private readonly countriesRepository: CountriesRepository) {}
+
   searchBy(term: string) {
-    this.subscription.add(this.countriesService.searchCountry(term)
+    this.subscription.add(this.countriesRepository.searchByName(term)
       .subscribe(countries => this.countries = countries));
   }
   ngOnDestroy(): void {
