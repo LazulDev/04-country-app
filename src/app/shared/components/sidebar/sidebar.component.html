@@ -1,0 +1,12 @@
+<h2>Países</h2>
+<hr/>
+
+<nav>
+  <ul class="list-group">
+    @for( item of items; track item.title) {
+      <li class="list-group-item" [routerLink]="item.routerLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        {{item.title}}
+      </li>
+    }
+  </ul>
+</nav>
