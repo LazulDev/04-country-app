@@ -4,4 +4,6 @@ export interface Country {
   name: string;
   capital: string;
   population: number;
+  code: string;
+  translations: string[]
 }

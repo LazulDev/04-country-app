@@ -1,3 +1,4 @@
+import {DecimalPipe} from "@angular/common";
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {CountriesRepository} from "../../domain/countries-repository";
@@ -7,14 +8,16 @@ import {COUNTRY_REPOSITORY_TOKEN} from "../../domain/country-repository-token";
 @Component({
   selector: 'app-country-page',
   standalone: true,
-  imports: [],
+  imports: [
+    DecimalPipe
+  ],
   templateUrl: './country-page.component.html',
   styleUrl: './country-page.component.css'
 })
 export class CountryPageComponent implements OnInit {
   @Input('alphaCode') alphaCode = '';
 
-  country?: Country ;
+  country?: Country;
 
   constructor(
     private readonly router: Router,

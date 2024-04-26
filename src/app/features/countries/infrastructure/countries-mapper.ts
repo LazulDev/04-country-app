@@ -21,7 +21,16 @@ export class CountryMapper implements ReadMapper<CountryDto, Country>{
       flagImage: {url: dto.flags.svg, alt: dto.name.common},
       name: dto.name.common,
       capital: dto.capital?.at(0) ?? '-',
-      population: dto.population
+      population: dto.population,
+      code: dto.cca3,
+      translations: this.getTranslations(dto)
     }
   }
+  private getTranslations(dto: CountryDto) {
+    return Object.entries(dto.translations)
+      .filter(([key]) => ALLOWED_TRANSLATION_KEYS.includes(key))
+      .map(([,value]) => (value.common)) ;
+  }
 }
+
+const ALLOWED_TRANSLATION_KEYS = ['ara', 'bre', 'ces', 'kor', 'jpn', 'fra', 'ita', 'per', 'rus', 'tur', 'zho' ]
