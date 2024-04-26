@@ -4,6 +4,7 @@
       <th>#</th>
       <th>Icon</th>
       <th>Bandera</th>
+      <th>País</th>
       <th>Capital</th>
       <th>Población</th>
       <th></th>
@@ -18,8 +19,8 @@
           </td>
           <td> {{country.name}}</td>
           <td> {{country.capital}}</td>
-          <td> {{country.population}}</td>
-          <td> <a href="#">Ver más</a></td>
+          <td> {{country.population | number}}</td>
+          <td> <a [routerLink]="['/countries/by', country.code]">Ver más</a></td>
         </tr>
       }
     </tbody>
