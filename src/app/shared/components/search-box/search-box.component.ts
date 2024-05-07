@@ -1,5 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {UntilDestroy} from "@ngneat/until-destroy";
+import {tap} from "rxjs";
+import {Debouncer} from "../../../core/utils/debouncer";
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'shared-search-box',
   standalone: true,
@@ -7,12 +11,21 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   templateUrl: './search-box.component.html',
   styleUrl: './search-box.component.css'
 })
-export class SearchBoxComponent {
+export class SearchBoxComponent implements OnInit {
+  @Input() value: string = '';
   @Input() placeholder: string = '';
-  @Output() onValue = new EventEmitter<string>();
 
-  onKeyup(value: string) {
-    this.onValue.emit(value);
+  @Output() onDebounce = new EventEmitter<string>();
+
+
+  private readonly debouncer = Debouncer.build(300);
+
+  onKeyPress(value: string) {
+    this.debouncer.next(value);
+  }
+
+  ngOnInit(): void {
+    this.debouncer.obs$.pipe(tap(console.info)).subscribe(value => this.onDebounce.emit(value));
   }
 
 }

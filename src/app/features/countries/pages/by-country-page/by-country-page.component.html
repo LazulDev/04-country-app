@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col">
-    <shared-search-box placeholder="Buscar por país" (onValue)="searchBy($event)"></shared-search-box>
+    <shared-search-box placeholder="Buscar por país" [value]="term" (onDebounce)="searchBy($event)"></shared-search-box>
   </div>
 </div>
 
@@ -13,3 +13,7 @@
     <countries-country-table [countries]="countries"></countries-country-table>
   </div>
 </div>
+
+@if (isLoading) {
+  <shared-loading-spinner></shared-loading-spinner>
+}

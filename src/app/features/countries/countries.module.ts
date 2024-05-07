@@ -20,10 +20,12 @@ const PAGES = [
   providers: [
     CountryMapper,
     CountriesMapper,
-    CountriesHttpRepository,{
-    provide: COUNTRY_REPOSITORY_TOKEN,
-    useClass: CountriesHttpRepository
-  }],
+    CountriesHttpRepository,
+    {
+      provide: COUNTRY_REPOSITORY_TOKEN,
+      useClass: CountriesHttpRepository
+    }
+  ],
   imports: [
     PAGES,
     RouterModule.forChild(countriesRoutes),

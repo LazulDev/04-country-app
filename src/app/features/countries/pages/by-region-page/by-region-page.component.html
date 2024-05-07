@@ -3,7 +3,12 @@
 
 <div class="row">
   <div class="col">
-    <shared-search-box placeholder="Buscar por región" (onValue)="searchBy($event)"></shared-search-box>
+
+    @for (region of regions; track region) {
+      <button class="btn mx-2"
+              [class.btn-outline-primary]="region === selectedRegion"
+              (click)="searchBy(region)">{{ region }}</button>
+    }
   </div>
 </div>
 
@@ -13,3 +18,7 @@
     <countries-country-table [countries]="countries"></countries-country-table>
   </div>
 </div>
+
+@if (isLoading) {
+  <shared-loading-spinner></shared-loading-spinner>
+}
